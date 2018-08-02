@@ -1,0 +1,14 @@
+{
+    "name": "nikolays93/wp-admin-form",
+    "description": "My wordpres admin tool: forms",
+    "authors": [
+        {
+            "name": "nikolays93",
+            "email": "nikolays93@ya.ru"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Nikolays93\\WPAdminForm\\": "src/" }
+    },
+    "require": {}
+}
