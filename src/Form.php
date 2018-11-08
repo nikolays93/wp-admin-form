@@ -32,8 +32,7 @@ class Form extends Active
                     sprintf('%s[%s][%s]', $args['admin_page'], $args['sub_name'], $field_name) :
                     sprintf('%s[%s]', $args['admin_page'], $field_name);
 
-                if( !isset($field['check_active']) )
-                    $field['check_active'] = 'id';
+                if( !isset($field['check_active']) ) $field['check_active'] = 'id';
                 // }
             }
         }
@@ -47,13 +46,16 @@ class Form extends Active
         $arrActive = $this->get( $this->args );
 
         $html = $this->args['form_wrap'][0];
-        foreach ($this->fields as $field) {
-            if ( ! isset($field['id']) && ! isset($field['name']) )
-                continue;
 
-            $active_key = $field['check_active'] ?
-                $field[ $field['check_active'] ] :
-                str_replace('[]', '', $field['name']);
+        foreach ($this->fields as $field) {
+            if ( ! isset($field['id']) && ! isset($field['name']) ) continue;
+
+            if( !empty($field['check_active']) ) {
+                $active_key = $field[ $field['check_active'] ];
+            }
+            else {
+                $active_key = str_replace('[]', '', isset($field['name']) ? $field['name'] : $field['id']);
+            }
             $active_value = isset( $arrActive[ $active_key ] ) ? $arrActive[ $active_key ] : false;
 
             // &$field
