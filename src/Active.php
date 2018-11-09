@@ -21,7 +21,7 @@ class Active
 
     private function _active( $args )
     {
-        if( $args['postmeta'] ){
+        if( !empty($args['postmeta']) ) {
             global $post;
 
             // do not use instanceof
@@ -29,9 +29,8 @@ class Active
                 return false;
             }
 
-            $active = array();
-            if( $sub_name = $args['sub_name'] ) {
-                $active = get_post_meta( $post->ID, $sub_name, true );
+            if( !empty($args['sub_name']) ) {
+                $active = get_post_meta( $post->ID, $args['sub_name'], true );
             }
             else {
                 foreach ($this->fields as $field) {
@@ -39,7 +38,10 @@ class Active
                 }
             }
         }
-        else {
+        /**
+         * @todo check about admin page
+         */
+        elseif ( !empty($args['admin_page']) ) {
             $active = get_option( $args['admin_page'], array() );
 
             if( $sub_name = $args['sub_name'] ) {
