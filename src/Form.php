@@ -21,7 +21,7 @@ class Form extends Active
             $args = array();
 
         $args = Preset::parse_args($args);
-        if( $args['admin_page'] ) { // || $args['sub_name']
+        if( $args['admin_page'] || $args['sub_name'] ) {
             foreach ($data as &$field) {
                 if ( ! isset($field['id']) && ! isset($field['name']) )
                     continue;
@@ -48,14 +48,29 @@ class Form extends Active
         $html = $this->args['form_wrap'][0];
 
         foreach ($this->fields as $field) {
+            /**
+             * If is field has id or name
+             */
             if ( ! isset($field['id']) && ! isset($field['name']) ) continue;
 
+            /**
+             * Check the fieldname and Get active value
+             */
             if( !empty($field['check_active']) ) {
+                /**
+                 * if is key field set manually
+                 */
                 $active_key = $field[ $field['check_active'] ];
             }
             else {
-                $active_key = str_replace('[]', '', isset($field['name']) ? $field['name'] : $field['id']);
+                $active_key = isset($field['name']) ? $field['name'] : $field['id'];
             }
+
+            /**
+             * If is name for array
+             */
+            $active_key = str_replace('[]', '', $active_key);
+
             $active_value = isset( $arrActive[ $active_key ] ) ? $arrActive[ $active_key ] : false;
 
             // &$field
