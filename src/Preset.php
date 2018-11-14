@@ -52,6 +52,10 @@ class Preset
             $defaults['admin_page'] = $args['admin_page'];
         }
 
+        if( !empty($args['postmeta']) ) {
+            $defaults['admin_page'] = false;
+        }
+
         $args = wp_parse_args( $args, $defaults );
 
         if( ! is_array($args['item_wrap']) )
