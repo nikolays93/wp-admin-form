@@ -14,7 +14,7 @@ if( empty($attrs['checked']) ) {
 
 $attrs['type'] = esc_attr( $field['type'] );
 if( !empty($attrs['class']) ) $attrs['class'].= ' ';
-$attrs['class'].= 'input-' . $attrs['type'];
+$attrs['class'].= 'input-checkbox';
 
 // if $args['clear'] === false dont use defaults (couse default + empty value = true)
 if( false !== $args['clear'] ) {

@@ -10,7 +10,7 @@ if ( ! empty( $field['options'] ) ) {
     }
 
     if( !empty($attrs['class']) ) $attrs['class'].= ' ';
-    $attrs['class'].= 'input-' . $attrs['type'];
+    $attrs['class'].= 'input-select';
 
     $input .= $label[0];
     $input .= '<select ' . Util::get_attributes_text( $attrs ) . '>';
