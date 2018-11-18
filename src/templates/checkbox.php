@@ -4,8 +4,12 @@ namespace NikolayS93\WPAdminForm;
 
 if( empty($attrs['value']) ) $attrs['value'] = 'on';
 if( empty($attrs['checked']) ) {
-    if( ! $attrs['checked'] = checked( $entry, true, false ) )
-        unset($attrs['checked']);
+	if( $entry ) {
+		$attrs['checked'] = 'checked';
+	}
+	else {
+		unset($attrs['checked']);
+	}
 }
 
 $attrs['type'] = esc_attr( $field['type'] );
