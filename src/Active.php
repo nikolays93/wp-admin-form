@@ -50,9 +50,7 @@ class Active
         }
 
         /** if active not found */
-        if( ! is_array($active) || $active === array() ) {
-            return false;
-        }
+        if( empty($active) ) return false;
 
         /**
          * @todo: add recursive handle

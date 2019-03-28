@@ -4,21 +4,35 @@ namespace NikolayS93\WPAdminForm;
 
 class Form extends Active
 {
-    protected $fields,
+    protected $fields = array(),
               $args;
 
     protected static $hiddens = array();
 
+    public function add($data = null)
+    {
+        if( !is_array($data) ) $data = array();
+        if( isset($data['id']) || isset($data['name']) ) $data = array($data);
+
+        foreach ($data as $field) {
+            $this->fields[ $field['id'] ] = $field;
+        }
+    }
+
+    public function del($id)
+    {
+        if( isset( $this->fields[ $id ] ) ) {
+            unset($this->fields[ $id ]);
+            return true;
+        }
+
+        return false;
+    }
+
     public function __construct($data = null, $args = array())
     {
-        if( !is_array($data) )
-            $data = array();
-
-        if( isset($data['id']) || isset($data['name']) )
-            $data = array($data);
-
-        if( !is_array($args) )
-            $args = array();
+        $this->add($data);
+        if( !is_array($args) ) $args = array();
 
         $args = Preset::parse_args($args);
         if( $args['admin_page'] || $args['sub_name'] ) {
@@ -37,7 +51,6 @@ class Form extends Active
             }
         }
 
-        $this->fields = $data;
         $this->args = $args;
     }
 
