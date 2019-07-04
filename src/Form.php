@@ -31,7 +31,6 @@ class Form extends Active
 
     public function __construct($data = null, $args = array())
     {
-        $this->add($data);
         if( !is_array($args) ) $args = array();
 
         $args = Preset::parse_args($args);
@@ -51,6 +50,7 @@ class Form extends Active
             }
         }
 
+        $this->add($data);
         $this->args = $args;
     }
 
